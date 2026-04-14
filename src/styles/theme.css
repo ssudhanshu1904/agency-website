@@ -1,0 +1,23 @@
+:root {
+  --primary: #8b5cf6;
+  --background: #ffffff;
+  --foreground: #312e81;
+  --accent: #dbeafe;
+  --muted: #f5f3ff;
+  --border: #e0e7ff;
+
+  --primary-rgb: 139 92 246;
+  --background-rgb: 255 255 255;
+  --foreground-rgb: 49 46 129;
+  --accent-rgb: 219 234 254;
+  --muted-rgb: 245 243 255;
+  --border-rgb: 224 231 255;
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #e0e7ff;
+
+  --background-rgb: 15 23 42;
+  --foreground-rgb: 224 231 255;
+}
