@@ -15,36 +15,33 @@ interface TeamMember {
 
 const teamMembers: TeamMember[] = [
   {
-    name: 'Amber Grace W.',
-    title: 'Vice President of Sales',
+    name: 'Sudhanshu',
+    title: 'Full Stack Developer',
     description:
       'Leads strategic growth initiatives across enterprise accounts, aligning business outcomes with product delivery and market expansion.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/team1.png',
     githubUrl: '#',
     twitterUrl: '#',
     youtubeUrl: '#',
     linkedinUrl: '#',
   },
   {
-    name: 'Michael Chen',
-    title: 'Senior Software Engineer',
+    name: 'Amar Singh',
+    title: 'Mern Stack Developer',
     description:
       'Drives platform architecture and performance engineering, ensuring resilient systems, secure integrations, and rapid product iteration.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1628157588553-5eeea00af15c?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/team2.png',
     githubUrl: '#',
     twitterUrl: '#',
     youtubeUrl: '#',
     linkedinUrl: '#',
   },
   {
-    name: 'Jessica Roberts',
-    title: 'Lead Product Designer',
+    name: 'Aditya Ranjan',
+    title: 'Product Manager',
     description:
       'Shapes end-to-end user experience with design systems and interaction patterns that balance visual impact, accessibility, and conversion.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/team3.png',
     githubUrl: '#',
     twitterUrl: '#',
     youtubeUrl: '#',
