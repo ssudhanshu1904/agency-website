@@ -59,7 +59,7 @@ function PageTransition({ children }) {
     <AnimatePresence mode='wait' initial={false}>
       <motion.div
         key={location.pathname}
-        className='relative'
+        className='relative overflow-hidden'
         initial={{ opacity: 0, x: profile.enterX * direction, filter: `blur(${profile.enterBlur}px)` }}
         animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
         exit={{ opacity: 0, x: -profile.exitX * direction, filter: `blur(${profile.exitBlur}px)` }}
@@ -67,8 +67,8 @@ function PageTransition({ children }) {
       >
         <motion.div
           aria-hidden='true'
-          className='pointer-events-none fixed inset-0 z-0 mix-blend-screen'
-          style={{ backgroundImage: overlay.gradient }}
+          className='pointer-events-none absolute inset-0 z-0 mix-blend-screen'
+          style={{ backgroundImage: overlay.gradient, backgroundRepeat: 'no-repeat' }}
           initial={{ opacity: 0, scale: 1.02 }}
           animate={{ opacity: [0, overlay.maxOpacity, 0], scale: [1.02, 1, 0.995] }}
           transition={{ duration: Math.max(0.6, duration + 0.35), ease: 'easeOut' }}
