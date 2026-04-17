@@ -9,6 +9,7 @@ export interface GalleryItem {
   binomial: string
   photo: {
     url: string
+    placeholder?: string
     text: string
     pos?: string
     by: string
@@ -29,6 +30,16 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
     const rootRef = useRef<HTMLDivElement | null>(null)
     const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
     const animationFrameRef = useRef<number | null>(null)
+    const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({})
+
+    const markImageLoaded = (key: string) => {
+      setLoadedImages((prev) => {
+        if (prev[key]) {
+          return prev
+        }
+        return { ...prev, [key]: true }
+      })
+    }
 
     useEffect(() => {
       const node = rootRef.current
@@ -143,10 +154,24 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
               <div key={item.photo.url} className='circular-gallery-mobile-card'>
                 <div className='circular-gallery-mobile-media'>
                   <img
+                    src={item.photo.placeholder || item.photo.url}
+                    alt=''
+                    aria-hidden='true'
+                    className='circular-gallery-mobile-img circular-gallery-blur-placeholder'
+                    style={{ objectPosition: item.photo.pos || 'center' }}
+                  />
+                  <img
                     src={item.photo.url}
                     alt={item.photo.text}
-                    className='circular-gallery-mobile-img'
+                    className={`circular-gallery-mobile-img circular-gallery-main-image ${
+                      loadedImages[item.photo.url] ? 'circular-gallery-main-image-loaded' : ''
+                    }`}
                     style={{ objectPosition: item.photo.pos || 'center' }}
+                    loading='lazy'
+                    decoding='async'
+                    sizes='(max-width: 760px) 84vw, 380px'
+                    onLoad={() => markImageLoaded(item.photo.url)}
+                    onError={() => markImageLoaded(item.photo.url)}
                   />
                   <div className='circular-gallery-mobile-overlay'>
                     <h2 className='text-base font-bold'>{item.common}</h2>
@@ -211,10 +236,24 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
               >
                 <div className='group relative h-full w-full overflow-hidden rounded-lg border border-[var(--border)] bg-[rgba(11,14,26,0.72)] shadow-2xl backdrop-blur-lg'>
                   <img
+                    src={item.photo.placeholder || item.photo.url}
+                    alt=''
+                    aria-hidden='true'
+                    className='absolute inset-0 h-full w-full object-cover circular-gallery-blur-placeholder'
+                    style={{ objectPosition: item.photo.pos || 'center' }}
+                  />
+                  <img
                     src={item.photo.url}
                     alt={item.photo.text}
-                    className='absolute inset-0 h-full w-full object-cover'
+                    className={`absolute inset-0 h-full w-full object-cover circular-gallery-main-image ${
+                      loadedImages[item.photo.url] ? 'circular-gallery-main-image-loaded' : ''
+                    }`}
                     style={{ objectPosition: item.photo.pos || 'center' }}
+                    loading='lazy'
+                    decoding='async'
+                    sizes='(max-width: 760px) 84vw, 560px'
+                    onLoad={() => markImageLoaded(item.photo.url)}
+                    onError={() => markImageLoaded(item.photo.url)}
                   />
                   <div className='absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 text-white'>
                     <h2 className='text-base font-bold sm:text-lg'>{item.common}</h2>

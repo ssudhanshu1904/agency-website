@@ -6,7 +6,8 @@ const portfolioItems = [
     common: 'Fintech Dashboard',
     binomial: 'React, Recharts, Stripe',
     photo: {
-      url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=900&auto=format&fit=crop&q=80',
+      url: '/images/optimized/portfolio-dev.webp',
+      placeholder: '/images/placeholders/portfolio-dev.webp',
       text: 'code editor on laptop screen',
       pos: '52% 50%',
       by: 'Fotis Fotopoulos',
@@ -16,7 +17,8 @@ const portfolioItems = [
     common: 'E-commerce Experience',
     binomial: 'Next.js, Headless CMS',
     photo: {
-      url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&auto=format&fit=crop&q=80',
+      url: '/images/optimized/portfolio-dashboard.webp',
+      placeholder: '/images/placeholders/portfolio-dashboard.webp',
       text: 'analytics dashboard with charts',
       pos: '50% 45%',
       by: 'Carlos Muza',
@@ -26,7 +28,8 @@ const portfolioItems = [
     common: 'SaaS Product Launch',
     binomial: 'Design System, Motion UI',
     photo: {
-      url: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&auto=format&fit=crop&q=80',
+      url: '/images/optimized/portfolio-team.webp',
+      placeholder: '/images/placeholders/portfolio-team.webp',
       text: 'team discussing product roadmap',
       by: 'Austin Distel',
     },
@@ -35,7 +38,8 @@ const portfolioItems = [
     common: 'Brand Website Revamp',
     binomial: 'Vite, Tailwind, GSAP',
     photo: {
-      url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=80',
+      url: '/images/optimized/accordion-chatbot-rag.webp',
+      placeholder: '/images/placeholders/accordion-chatbot-rag.webp',
       text: 'circuit board macro shot',
       by: 'Umberto',
     },
@@ -44,7 +48,8 @@ const portfolioItems = [
     common: 'AI Workflow Platform',
     binomial: 'Node, Python, LangOps',
     photo: {
-      url: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&auto=format&fit=crop&q=80',
+      url: '/images/optimized/portfolio-laptop.webp',
+      placeholder: '/images/placeholders/portfolio-laptop.webp',
       text: 'developers collaborating at desk',
       by: 'Saru Robert',
     },
@@ -53,7 +58,8 @@ const portfolioItems = [
     common: 'Mobile Banking UX',
     binomial: 'React Native, API-first',
     photo: {
-      url: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=900&auto=format&fit=crop&q=80',
+      url: '/images/optimized/portfolio-mobile.webp',
+      placeholder: '/images/placeholders/portfolio-mobile.webp',
       text: 'smartphone showing app interface',
       by: 'NordWood Themes',
     },

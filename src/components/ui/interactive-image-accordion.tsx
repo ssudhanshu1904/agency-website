@@ -5,38 +5,39 @@ interface AccordionItemData {
   id: number
   title: string
   imageUrl: string
+  placeholderUrl: string
 }
 
 const accordionItems: AccordionItemData[] = [
   {
     id: 1,
     title: 'Voice Assistant',
-    imageUrl:
-      'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1974&auto=format&fit=crop',
+    imageUrl: '/images/optimized/accordion-voice-assistant.webp',
+    placeholderUrl: '/images/placeholders/accordion-voice-assistant.webp',
   },
   {
     id: 2,
     title: 'AI Image Generation',
-    imageUrl:
-      'https://images.unsplash.com/photo-1677442135136-760c813028c0?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: '/images/optimized/accordion-ai-image-generation.webp',
+    placeholderUrl: '/images/placeholders/accordion-ai-image-generation.webp',
   },
   {
     id: 3,
     title: 'AI Chatbot + Local RAG',
-    imageUrl:
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1974&auto=format&fit=crop',
+    imageUrl: '/images/optimized/accordion-chatbot-rag.webp',
+    placeholderUrl: '/images/placeholders/accordion-chatbot-rag.webp',
   },
   {
     id: 4,
     title: 'AI Agent',
-    imageUrl:
-      'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2090&auto=format&fit=crop',
+    imageUrl: '/images/optimized/accordion-ai-agent.webp',
+    placeholderUrl: '/images/placeholders/accordion-ai-agent.webp',
   },
   {
     id: 5,
     title: 'Visual Understanding',
-    imageUrl:
-      'https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: '/images/optimized/accordion-visual-understanding.webp',
+    placeholderUrl: '/images/placeholders/accordion-visual-understanding.webp',
   },
 ]
 
@@ -48,10 +49,13 @@ type ItemProps = {
 }
 
 const AccordionItem = ({ item, isActive, onActivate, blockClick }: ItemProps) => {
+  const [isLoaded, setIsLoaded] = useState(false)
+
   return (
     <button
       type='button'
       className={`interactive-accordion-item ${isActive ? 'interactive-accordion-item-active' : ''}`}
+      style={{ backgroundImage: `url(${item.placeholderUrl})` }}
       onMouseEnter={onActivate}
       onFocus={onActivate}
       onClick={(event) => {
@@ -66,11 +70,16 @@ const AccordionItem = ({ item, isActive, onActivate, blockClick }: ItemProps) =>
       <img
         src={item.imageUrl}
         alt={item.title}
-        className='interactive-accordion-image'
+        className={`interactive-accordion-image ${isLoaded ? 'interactive-accordion-image-loaded' : ''}`}
+        loading={isActive ? 'eager' : 'lazy'}
+        decoding='async'
+        fetchPriority={isActive ? 'high' : 'low'}
+        onLoad={() => setIsLoaded(true)}
         onError={(event) => {
           const target = event.currentTarget
           target.onerror = null
           target.src = 'https://placehold.co/400x450/0b0e1a/00f5c8?text=Image+Error'
+          setIsLoaded(true)
         }}
       />
       <div className='interactive-accordion-overlay' />

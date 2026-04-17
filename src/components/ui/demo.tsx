@@ -6,7 +6,8 @@ const galleryData: GalleryItem[] = [
     common: 'Landing Redesign',
     binomial: 'Brand + Conversion',
     photo: {
-      url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=80',
+      url: '/images/optimized/portfolio-dev.webp',
+      placeholder: '/images/placeholders/portfolio-dev.webp',
       text: 'workspace with laptop and code',
       pos: '52% 50%',
       by: 'Christopher Gower',
@@ -16,7 +17,8 @@ const galleryData: GalleryItem[] = [
     common: 'SaaS Dashboard',
     binomial: 'Analytics + UX',
     photo: {
-      url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&auto=format&fit=crop&q=80',
+      url: '/images/optimized/portfolio-dashboard.webp',
+      placeholder: '/images/placeholders/portfolio-dashboard.webp',
       text: 'dashboard charts on monitor',
       pos: '54% 44%',
       by: 'Luke Chesser',
@@ -26,7 +28,8 @@ const galleryData: GalleryItem[] = [
     common: 'Mobile App UI',
     binomial: 'iOS + Android',
     photo: {
-      url: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&auto=format&fit=crop&q=80',
+      url: '/images/optimized/portfolio-mobile.webp',
+      placeholder: '/images/placeholders/portfolio-mobile.webp',
       text: 'smartphone app mockup',
       pos: '52% 40%',
       by: 'Mika Baumeister',
@@ -36,7 +39,8 @@ const galleryData: GalleryItem[] = [
     common: 'Commerce Platform',
     binomial: 'Headless + Payments',
     photo: {
-      url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&auto=format&fit=crop&q=80',
+      url: '/images/optimized/portfolio-dashboard.webp',
+      placeholder: '/images/placeholders/portfolio-dashboard.webp',
       text: 'business analytics board',
       pos: '52% 44%',
       by: 'Carlos Muza',
@@ -46,7 +50,8 @@ const galleryData: GalleryItem[] = [
     common: 'Cloud Ops Console',
     binomial: 'Infra + Monitoring',
     photo: {
-      url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=80',
+      url: '/images/optimized/accordion-chatbot-rag.webp',
+      placeholder: '/images/placeholders/accordion-chatbot-rag.webp',
       text: 'computer hardware close-up',
       pos: '50% 52%',
       by: 'Umberto',

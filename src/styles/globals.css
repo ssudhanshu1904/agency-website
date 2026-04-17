@@ -401,6 +401,10 @@ a {
   transition: width 0.62s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   padding: 0;
   background: rgba(11, 14, 26, 0.78);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: normal;
   flex: 0 0 auto;
 }
 
@@ -423,6 +427,12 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.interactive-accordion-image-loaded {
+  opacity: 1;
 }
 
 .interactive-accordion-overlay {
@@ -954,9 +964,25 @@ a {
 }
 
 .circular-gallery-mobile-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.circular-gallery-blur-placeholder {
+  transform: scale(1.06);
+  filter: blur(14px);
+}
+
+.circular-gallery-main-image {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.circular-gallery-main-image-loaded {
+  opacity: 1;
 }
 
 .circular-gallery-mobile-overlay {
