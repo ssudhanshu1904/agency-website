@@ -3,17 +3,17 @@ import { ArrowRight, Sparkles } from 'lucide-react'
 import useTypewriter from '../../hooks/useTypewriter'
 
 const TYPEWRITER_PHRASES = [
-  'Web Platforms',
-  'Mobile Products',
-  'Design Systems',
-  'Digital Experiences',
+  'Business Website ',
+  'Web Application ',
+  'Mobile Application ',
+  'Scalable MVP ',
 ]
 
 const STATS = [
-  { value: '140+', label: 'Projects shipped' },
-  { value: '98%', label: 'Client retention' },
-  { value: '< 72h', label: 'First delivery' },
-  { value: '4.9★', label: 'Average rating' },
+  { value: 'Web + App', label: 'One product partner' },
+  { value: 'UI to API', label: 'End-to-end delivery' },
+  { value: 'MVP -> Scale', label: 'Built for growth' },
+  { value: 'Remote', label: 'Global collaboration' },
 ]
 
 function Hero() {
@@ -29,7 +29,7 @@ function Hero() {
       <div className='section hero-content'>
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <span className='eyebrow'>
-            <Sparkles size={12} /> Build beyond templates
+            <Sparkles size={12} /> Stackstich digital studio
           </span>
         </motion.div>
 
@@ -46,7 +46,7 @@ function Hero() {
             <span className='cursor' />
           </span>
           <br />
-          <span className='hero-title-muted'>with a cybernetic edge.</span>
+          <span className='hero-title-muted'>for measurable business outcomes.</span>
         </motion.h1>
 
         <motion.p
@@ -55,8 +55,8 @@ function Hero() {
           transition={{ duration: 0.5, delay: 0.22 }}
           className='hero-subtitle'
         >
-          From strategy and interface systems to high-performance development - we ship
-          premium digital products that feel sharp, cinematic, and conversion-ready.
+          We design and build conversion-focused websites, custom web apps, and mobile apps
+          that help businesses launch faster and scale with confidence.
         </motion.p>
 
         <motion.div
@@ -66,9 +66,9 @@ function Hero() {
           className='hero-actions'
         >
           <button className='btn-primary'>
-            Book Discovery Call <ArrowRight size={14} />
+            Start Your Project <ArrowRight size={14} />
           </button>
-          <button className='btn-ghost'>See Case Studies</button>
+          <button className='btn-ghost'>Explore Services</button>
         </motion.div>
 
         <motion.div

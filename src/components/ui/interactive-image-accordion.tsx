@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ArrowRight, Sparkles } from 'lucide-react'
 
 interface AccordionItemData {
@@ -43,16 +43,24 @@ const accordionItems: AccordionItemData[] = [
 type ItemProps = {
   item: AccordionItemData
   isActive: boolean
-  onMouseEnter: () => void
+  onActivate: () => void
+  blockClick: boolean
 }
 
-const AccordionItem = ({ item, isActive, onMouseEnter }: ItemProps) => {
+const AccordionItem = ({ item, isActive, onActivate, blockClick }: ItemProps) => {
   return (
     <button
       type='button'
       className={`interactive-accordion-item ${isActive ? 'interactive-accordion-item-active' : ''}`}
-      onMouseEnter={onMouseEnter}
-      onFocus={onMouseEnter}
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
+      onClick={(event) => {
+        if (blockClick) {
+          event.preventDefault()
+          return
+        }
+        onActivate()
+      }}
       aria-label={item.title}
     >
       <img
@@ -80,13 +88,103 @@ const AccordionItem = ({ item, isActive, onMouseEnter }: ItemProps) => {
 
 export function LandingAccordionItem() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isTouchDragging, setIsTouchDragging] = useState(false)
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null)
+  const trackRef = useRef<HTMLDivElement | null>(null)
+  const autoPauseUntilRef = useRef(0)
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) {
+      return
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
+      return
+    }
+
+    let animationId = 0
+    let lastTs = 0
+    let isMobileView = window.matchMedia('(max-width: 900px)').matches
+
+    const updateViewportMode = () => {
+      isMobileView = window.matchMedia('(max-width: 900px)').matches
+    }
+
+    const step = (ts: number) => {
+      if (!lastTs) {
+        lastTs = ts
+      }
+
+      const delta = ts - lastTs
+      lastTs = ts
+
+      if (isMobileView && Date.now() >= autoPauseUntilRef.current) {
+        const maxScrollLeft = track.scrollWidth - track.clientWidth
+        if (maxScrollLeft > 0) {
+          const pxPerSecond = 28
+          track.scrollLeft += (pxPerSecond * delta) / 1000
+
+          if (track.scrollLeft >= maxScrollLeft - 1) {
+            track.scrollLeft = 0
+          }
+        }
+      }
+
+      animationId = window.requestAnimationFrame(step)
+    }
+
+    window.addEventListener('resize', updateViewportMode)
+    animationId = window.requestAnimationFrame(step)
+
+    return () => {
+      window.removeEventListener('resize', updateViewportMode)
+      window.cancelAnimationFrame(animationId)
+    }
+  }, [])
 
   const handleItemHover = (index: number) => {
     setActiveIndex(index)
   }
 
   const handleTrackMouseLeave = () => {
+    const canUseHover = typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    if (!canUseHover) {
+      return
+    }
+
     setActiveIndex(0)
+  }
+
+  const handleTrackTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0]
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY }
+    autoPauseUntilRef.current = Date.now() + 2200
+    setIsTouchDragging(false)
+  }
+
+  const handleTrackTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (!touchStartRef.current) {
+      return
+    }
+
+    const touch = event.touches[0]
+    const dx = Math.abs(touch.clientX - touchStartRef.current.x)
+    const dy = Math.abs(touch.clientY - touchStartRef.current.y)
+
+    if (dx > 8 && dx > dy) {
+      setIsTouchDragging(true)
+      autoPauseUntilRef.current = Date.now() + 2200
+    }
+  }
+
+  const handleTrackTouchEnd = () => {
+    touchStartRef.current = null
+    autoPauseUntilRef.current = Date.now() + 1200
+    window.setTimeout(() => {
+      setIsTouchDragging(false)
+    }, 40)
   }
 
   return (
@@ -114,13 +212,22 @@ export function LandingAccordionItem() {
           </div>
 
           <div className='interactive-accordion-panel'>
-            <div className='interactive-accordion-track' onMouseLeave={handleTrackMouseLeave}>
+            <div
+              ref={trackRef}
+              className='interactive-accordion-track'
+              onMouseLeave={handleTrackMouseLeave}
+              onTouchStart={handleTrackTouchStart}
+              onTouchMove={handleTrackTouchMove}
+              onTouchEnd={handleTrackTouchEnd}
+              onTouchCancel={handleTrackTouchEnd}
+            >
               {accordionItems.map((item, index) => (
                 <AccordionItem
                   key={item.id}
                   item={item}
                   isActive={index === activeIndex}
-                  onMouseEnter={() => handleItemHover(index)}
+                  onActivate={() => handleItemHover(index)}
+                  blockClick={isTouchDragging}
                 />
               ))}
             </div>

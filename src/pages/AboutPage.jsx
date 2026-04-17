@@ -1,7 +1,7 @@
-import About from '../components/sections/About'
+import AboutPageSection from '../components/sections/AboutPageSection'
 
 function AboutPage() {
-  return <About />
+  return <AboutPageSection />
 }
 
 export default AboutPage
